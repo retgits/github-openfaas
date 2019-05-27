@@ -1,0 +1,19 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://localhost:31112
+functions:
+  githubissues:
+    lang: gomods-http
+    handler: ./function
+    image: retgits/openfaas-githubissues:latest
+    secrets:
+      - github-accesstoken
+    environment:
+      interval: 60
+      trelloboard: Main
+      trellolist: Tomorrow
+      trellofunction: trellocard
+      ofgateway: http://gateway.openfaas:8080
+    labels:
+      com.openfaas.scale.zero: true
